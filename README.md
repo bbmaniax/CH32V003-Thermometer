@@ -31,25 +31,17 @@
 
 ### 統合開発環境
 
-| 名前 | 説明 |
-|:-----------|:-----|
-| Arduino IDE | 統合開発環境 |
-
 **インストール**:
 1. 公式サイト [https://www.arduino.cc/en/software/#ide](https://www.arduino.cc/en/software/#ide) からダウンロード・インストール
 
-### ボードサポートパッケージ
-
-| 名前 | 説明 |
-|:------|:-----|
-| CH32V RISC-V Arduino | ボードサポートパッケージ |
+### ボードマネージャ
 
 **インストール**:
 1. Arduino IDE の「ファイル」→「環境設定」→「追加のボードマネージャのURL」に以下を追加:
    ```
-   https://github.com/openwch/board_manager_files/raw/main/package_ch32v_index.json
+   https://raw.githubusercontent.com/ch32-riscv-ug/arduino_core_ch32_riscv_arduino/main/package_ch32-riscv-arduino.json
    ```
-2. ボードマネージャーで「CH32V」を検索・インストール
+2. ボードマネージャーで「CH32 RISC-V Arduino」を検索し、「インストール」ボタンをクリック
 
 ### 依存ライブラリ
 
@@ -58,6 +50,13 @@
 | DigitalButton | タクトスイッチ制御 |
 
 **インストール**: Arduino IDEのライブラリマネージャーで検索・インストール
+
+## ビルド・書き込み手順
+
+1. Arduino IDE で `CH32V003-Thermometer.ino` を開く
+2. 「ツール」→「ボード」→「CH32 RISC-V Arduino」→「CH32V003」を選択
+3. 「ツール」→「ポート」でWCH-LinkEが接続されているポートを選択
+4. 画面上部の右向き矢印ボタン（アップロード）をクリック
 
 ## 操作
 
