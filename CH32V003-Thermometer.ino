@@ -14,7 +14,7 @@
 #define SERIAL_SPEED 115200
 #define BUTTON_PIN PD0
 #define DS18B20_PIN PC5
-#define DS18B20_TEMPERATURE_OFFSET -90
+#define DS18B20_TEMPERATURE_OFFSET -9
 #define DISPLAY_WIDTH 128
 #define DISPLAY_HEIGHT 32
 #define DISPLAY_BUFFER_SIZE (DISPLAY_WIDTH * DISPLAY_HEIGHT / 8)
@@ -68,10 +68,9 @@ void loop() {
   }
 
   if (sensorManager.isReady()) {
-    static SensorManager::SensorData data;
-    data = sensorManager.getSensorData();
-    model.update(data);
+    SensorManager::SensorData data = sensorManager.getSensorData();
     printSensorData(millis(), data);
+    model.update(data);
     needRender = true;
   }
 
@@ -88,11 +87,12 @@ void printSensorData(unsigned long timestamp, const SensorManager::SensorData& d
   Serial.print(timestamp);
   Serial.print(" T:");
   printSensorValue(data.temperature);
+  Serial.println();
 }
 
 void printSensorValue(int16_t value) {
-  int16_t intPart = value / 100;
-  uint8_t fracPart = abs(value % 100) / 10;
+  int16_t intPart = value / 10;
+  uint8_t fracPart = abs(value % 10);
 
   if (value < 0 && intPart == 0) {
     Serial.print("-0.");
@@ -101,5 +101,5 @@ void printSensorValue(int16_t value) {
     Serial.print(".");
   }
 
-  Serial.println(fracPart);
+  Serial.print(fracPart);
 }
