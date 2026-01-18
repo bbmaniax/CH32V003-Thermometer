@@ -109,8 +109,8 @@ void View::drawSensorData(int16_t value, const char* unit, const Rect& rect, Tex
 
   strcpy(valueTextBuffer, "--.-");
   if (IS_VALID_TEMPERATURE(value)) {
-    int16_t intPart = value / 100;
-    uint8_t fracPart = abs(value % 100) / 10;
+    int16_t intPart = value / 10;
+    uint8_t fracPart = abs(value % 10);
     if (value < 0 && intPart == 0) {
       sprintf(valueTextBuffer, "-0.%u", fracPart);
     } else {
@@ -121,7 +121,6 @@ void View::drawSensorData(int16_t value, const char* unit, const Rect& rect, Tex
   TextSize valueSize = textSize;
   TextSize unitSize = (textSize >= TEXT_SIZE_MEDIUM) ? static_cast<TextSize>(textSize - 1) : textSize;
 
-  // Add degree symbol for temperature
   if (strcmp(unit, "C") == 0) {
     strcpy(unitTextBuffer, "\001C");
   } else {

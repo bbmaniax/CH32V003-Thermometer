@@ -33,7 +33,7 @@ bool DS18B20::readTemparature(int16_t& temperature) {
   }
 
   int16_t raw = (data[1] << 8) | data[0];
-  int32_t temparature = (static_cast<int32_t>(raw) * 100) / 16;
+  int32_t temparature = (static_cast<int32_t>(raw) * 10) / 16;
   temperature = static_cast<int16_t>(temparature) + offset;
   return true;
 }
