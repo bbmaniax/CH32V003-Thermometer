@@ -36,6 +36,12 @@ View view(model, display, HORIZONTAL_STEP);
 SensorManager sensorManager(ds18b20, MEASUREMENT_INTERVAL_MS);
 
 void setup() {
+  // Serial.begin(SERIAL_SPEED);
+  // while (!Serial && millis() < 1000);
+  Serial.println();
+  Serial.println("--");
+  Serial.println("Thermometer (built at " __DATE__ " " __TIME__ ")");
+
   button.begin();
   oneWire.begin();
   sensorManager.begin();
@@ -52,22 +58,20 @@ void loop() {
   sensorManager.update();
 
   if (button.isLongPressed()) {
-    // DEBUG_SERIAL_PRINTLN("Button 1 long pressed");
     view.flip();
     needRender = true;
   }
 
   if (button.isClicked()) {
-    // DEBUG_SERIAL_PRINTLN("Button 1 clicked");
     view.switchToNextViewMode();
     needRender = true;
   }
 
   if (sensorManager.isReady()) {
-    // DEBUG_SERIAL_PRINTLN("Time to read sensors");
     static SensorManager::SensorData data;
     data = sensorManager.getSensorData();
     model.update(data);
+    printSensorData(millis(), data);
     needRender = true;
   }
 
@@ -77,4 +81,25 @@ void loop() {
   }
 
   delay(10);
+}
+
+void printSensorData(unsigned long timestamp, const SensorManager::SensorData& data) {
+  Serial.print("TS:");
+  Serial.print(timestamp);
+  Serial.print(" T:");
+  printSensorValue(data.temperature);
+}
+
+void printSensorValue(int16_t value) {
+  int16_t intPart = value / 100;
+  uint8_t fracPart = abs(value % 100) / 10;
+
+  if (value < 0 && intPart == 0) {
+    Serial.print("-0.");
+  } else {
+    Serial.print(intPart);
+    Serial.print(".");
+  }
+
+  Serial.println(fracPart);
 }
