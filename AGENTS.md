@@ -55,7 +55,7 @@ CH32V003-Thermometerは、CH32V003マイコンを使用した温度計のプロ�
 	- 画面反転・モード切替
 - `DS18B20.h/.cpp`
 	- DS18B20 プロトコル実装
-	- `requestTemparature()` / `readTemparature()` API
+	- `requestTemperature()` / `readTemperature()` API
 - `OneWire.h/.cpp`
 	- 1-Wire 低レイヤ実装
 	- AVR と CH32V003 (`__riscv && CH32V003`) を分岐
@@ -111,7 +111,7 @@ CH32V003-Thermometerは、CH32V003マイコンを使用した温度計のプロ�
 
 ### DS18B20 / OneWire
 
-- DS18B20の公開API綴り（`Temparature`）は互換性維持のため変更しない
+- DS18B20の公開APIは `requestTemperature()` / `readTemperature()` を使用する
 - CH32V003分岐では `ch32v00x.h` を使ったGPIO直接制御を維持
 - タイミング依存処理（`delay_us` 等）の変更は影響が大きいため最小限にする
 

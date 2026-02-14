@@ -14,8 +14,8 @@ class DS18B20 {
   DS18B20(OneWire& wire, int16_t offset = 0);
 
   void begin(void);
-  void requestTemparature(void);
-  bool readTemparature(int16_t& temperature);
+  void requestTemperature(void);
+  bool readTemperature(int16_t& temperature);
 
  private:
   OneWire& wire;

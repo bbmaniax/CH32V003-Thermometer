@@ -22,7 +22,7 @@ void SensorManager::update() {
   switch (state) {
     case IDLE:
       if (millis() - lastReadTime >= interval) {
-        sensor.requestTemparature();
+        sensor.requestTemperature();
         requestTime = millis();
         state = REQUESTING;
         resultReady = false;
@@ -36,7 +36,7 @@ void SensorManager::update() {
       break;
 
     case READING: {
-      if (!sensor.readTemparature(lastTemperature)) {
+      if (!sensor.readTemperature(lastTemperature)) {
         lastTemperature = INVALID_TEMPERATURE_VALUE;
       }
       resultReady = true;
