@@ -122,7 +122,9 @@ void View::drawSensorData(int16_t value, const char* unit, const Rect& rect, Tex
   TextSize unitSize = (textSize >= TEXT_SIZE_MEDIUM) ? static_cast<TextSize>(textSize - 1) : textSize;
 
   if (strcmp(unit, "C") == 0) {
-    strcpy(unitTextBuffer, "\001C");
+    unitTextBuffer[0] = CHAR_DEGREE;
+    unitTextBuffer[1] = 'C';
+    unitTextBuffer[2] = '\0';
   } else {
     strncpy(unitTextBuffer, unit, sizeof(unitTextBuffer) - 1);
     unitTextBuffer[sizeof(unitTextBuffer) - 1] = '\0';
