@@ -3,7 +3,6 @@
 #include "DS18B20.h"
 
 #include "OneWire.h"
-#include "SensorManager.h"
 
 DS18B20::DS18B20(OneWire& wire, int16_t offset) : wire(wire), offset(offset) {
 }
