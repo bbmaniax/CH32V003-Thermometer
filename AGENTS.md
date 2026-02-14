@@ -44,6 +44,7 @@ CH32V003-Thermometerは、CH32V003マイコンを使用した温度計のプロ�
 	- ボタンイベント/測定完了イベントに応じた再描画制御
 - `SensorManager.h/.cpp`
 	- DS18B20 の非同期読み取り状態機械
+	- DS18B20/OneWire 初期化の集約
 	- 状態: `IDLE` / `REQUESTING` / `READING`
 - `SensorDataHistory.h/.cpp`
 	- 固定長履歴バッファ（先頭追加）
@@ -77,7 +78,7 @@ CH32V003-Thermometerは、CH32V003マイコンを使用した温度計のプロ�
 
 ### setup
 
-1. ボタン・1-Wire・センサーマネージャを初期化
+1. ボタンとセンサーマネージャを初期化（1-Wire初期化は `SensorManager.begin()` 経由）
 2. `model.begin()` / `view.begin()` を呼び出し
 
 ### loop

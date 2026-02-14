@@ -43,7 +43,6 @@ void setup() {
   Serial.println("Thermometer (built at " __DATE__ " " __TIME__ ")");
 
   button.begin();
-  oneWire.begin();
   sensorManager.begin();
   delay(100);
 
