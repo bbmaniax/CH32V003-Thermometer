@@ -95,7 +95,8 @@ CH32V003-Thermometerは、CH32V003マイコンを使用した温度計のプロ�
 ### SensorManager
 
 - 測定間隔は最小 `750ms` を下回らない
-- `isReady()` は結果取得フラグを消費する（1回だけ true）
+- `isReady()` は結果取得フラグを参照のみ（非破壊）
+- `consumeReady()` は結果取得フラグを消費する（1回だけ true）
 - 温度取得失敗時は `INVALID_TEMPERATURE_VALUE` を保存
 
 ### SensorDataHistory
@@ -114,6 +115,12 @@ CH32V003-Thermometerは、CH32V003マイコンを使用した温度計のプロ�
 - DS18B20の公開APIは `requestTemperature()` / `readTemperature()` を使用する
 - CH32V003分岐では `ch32v00x.h` を使ったGPIO直接制御を維持
 - タイミング依存処理（`delay_us` 等）の変更は影響が大きいため最小限にする
+
+### CH32V003 Core 制約
+
+- 現行の Arduino core (`ch32-riscv-arduino`) では `Serial.begin()` 呼び出しでハングアップする事象がある
+- CH32V003ターゲットでは `Serial.begin()` を使用しない
+- シリアルログを扱う変更を入れる場合は、対象coreバージョンで実機動作確認を必須とする
 
 ## ビルド・書き込み・検証
 
