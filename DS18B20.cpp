@@ -3,7 +3,6 @@
 #include "DS18B20.h"
 
 #include "OneWire.h"
-#include "SensorManager.h"
 
 DS18B20::DS18B20(OneWire& wire, int16_t offset) : wire(wire), offset(offset) {
 }
@@ -12,13 +11,13 @@ void DS18B20::begin(void) {
   wire.begin();
 }
 
-void DS18B20::requestTemparature(void) {
+void DS18B20::requestTemperature(void) {
   wire.reset();
   wire.skip();
   wire.write(0x44, 0);
 }
 
-bool DS18B20::readTemparature(int16_t& temperature) {
+bool DS18B20::readTemperature(int16_t& temperature) {
   wire.reset();
   wire.skip();
   wire.write(0xBE, 0);
@@ -33,7 +32,7 @@ bool DS18B20::readTemparature(int16_t& temperature) {
   }
 
   int16_t raw = (data[1] << 8) | data[0];
-  int32_t temparature = (static_cast<int32_t>(raw) * 10) / 16;
-  temperature = static_cast<int16_t>(temparature) + offset;
+  int32_t temperatureRaw = (static_cast<int32_t>(raw) * 10) / 16;
+  temperature = static_cast<int16_t>(temperatureRaw) + offset;
   return true;
 }

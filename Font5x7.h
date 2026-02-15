@@ -8,8 +8,7 @@
 #  include <Arduino.h>
 #  include <stdint.h>
 
-// Extended character codes
-#  define CHAR_DEGREE 0x01  // Degree symbol °
+#  define CHAR_DEGREE 0x01
 
 const uint8_t FONT5X7_WIDTH = 5;
 const uint8_t FONT5X7_HEIGHT = 7;

@@ -43,7 +43,6 @@ void setup() {
   Serial.println("Thermometer (built at " __DATE__ " " __TIME__ ")");
 
   button.begin();
-  oneWire.begin();
   sensorManager.begin();
   delay(100);
 
@@ -67,7 +66,7 @@ void loop() {
     needRender = true;
   }
 
-  if (sensorManager.isReady()) {
+  if (sensorManager.consumeReady()) {
     SensorManager::SensorData data = sensorManager.getSensorData();
     printSensorData(millis(), data);
     model.update(data);
