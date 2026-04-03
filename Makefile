@@ -76,7 +76,6 @@ endef
 clean:
 	rm -rf $(TMP_DIR)
 	rm -rf $(BIN_DIR)
-	rm -rf $(COVERAGE_DIR)
 	find . -type d -name "build" -exec rm -rf {} +
 	find . -type f -name "*.lst" -exec rm {} +
 	find . -type f -name "*.map" -exec rm {} +
