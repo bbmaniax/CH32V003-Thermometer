@@ -29,7 +29,6 @@ BUILD_DIR ?= ./build
 DEPLOY_ARDUINO_PORT_TTYUSB ?= /dev/ttyUSB0
 DEPLOY_ARDUINO_PORT_TTYACM ?= /dev/ttyACM0
 
-DEPLOY_UF2_CMD ?= /mnt/c/Windows/System32/robocopy.exe
 DEPLOY_UF2_PORT ?= D:/
 
 ## Macros
@@ -59,13 +58,13 @@ define deploy-arduinoasisp
 endef
 
 define deploy-uf2
-	$(DEPLOY_UF2_CMD) \
+	/mnt/c/Windows/System32/robocopy.exe \
 		"$(subst /,\,$(BUILD_DIR)/$(subst :,.,$(word 1,$(subst :, ,$(1))).$(word 2,$(subst :, ,$(1))).$(word 3,$(subst :, ,$(1)))))" \
 		"$(DEPLOY_UF2_PORT)" $(2).ino.uf2
 endef
 
 define deploy-ch32v
-	arduino-cli --config-file $(BUILD_CONFIG) upload --verbose \
+	arduino-cli upload --verbose \
 		-b $(1) \
 		--input-file $(BUILD_DIR)/$(subst :,.,$(word 1,$(subst :, ,$(1))).$(word 2,$(subst :, ,$(1))).$(word 3,$(subst :, ,$(1))))/$(2).ino.elf
 endef
