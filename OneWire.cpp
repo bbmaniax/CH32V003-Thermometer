@@ -29,10 +29,9 @@ static inline uint8_t ow_read(uint8_t pin) {
 }
 #elif defined(__riscv) && defined(CH32V003)
 #  include "ch32v00x.h"
-
 extern uint32_t SystemCoreClock;
-#  define OW_DISABLE_IRQ()
-#  define OW_ENABLE_IRQ()
+#  define OW_DISABLE_IRQ() __disable_irq()
+#  define OW_ENABLE_IRQ() __enable_irq()
 
 static void delay_us(uint16_t us) __attribute__((noinline));
 
